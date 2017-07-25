@@ -1,0 +1,56 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import *
+from Utilities.custom_loggers as cl
+import time
+
+class SeleniumDriver():
+  log = cl.customLogger(logging.WARNING)
+  
+  def __init__(driver):
+    self.driver = driver
+  
+  def getLocatorType(self,locatorType):
+    locatorType = locatorType.lower()
+    if locatorType = 'id':
+      return By.ID
+    elif locatorType = 'tag':
+      return By.TAGNAME
+    elif locatorType = 'class':
+      return By.CLASS_NAME
+    elif locatorType = 'link':
+      return By.LINK_TEXT
+    elif locatorType = 'xpath':
+      return By.XPATH
+    elif locatorType = 'css':
+      return By.CSS_SELECTOR
+    else:
+      self.log.info('LocatorType Not supported by Selenium')
+      
+   def getElement(self, locatorType, locator):
+    try:
+        locatorType = self.getLocatorType(locatorType)
+        element = self.driver.find_element(locator, locatorValue)
+        self.log.info('element is found')    
+    except:
+      self.log.info('element is not exist')  
+     return element  
+   
+   def elementClick(self,locatorType, locator):
+    try:
+      element = getElement(locatorType, locator)
+      element.click()
+      self.log.info('Element is clicked')
+    except:
+      self.log.info('Element is not clicked')
+   
+   def sendKeys(self,data, locatorType, locator):
+    try:
+      element = getElement(locatorType, locator)
+      element.send_keys(data)
+      self.log.info('Cannot enter the data')
+    except:
+      self.log.info('Element is not clicked')
+    
+    
+    
