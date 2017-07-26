@@ -1,0 +1,37 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from Base.SeleniumDriver import SeleniumDriver
+from utilities.cusotmerLoggers import customerLogger as cl
+import logging
+
+class homePage(SeleniumDriver):
+  
+  log = cl.customerLogger(logging.WARNING)
+  
+  def __init__(self,driver):
+    super().__init__(driver))
+    self.driver = driver
+  
+  #locator
+  _signin_link = ''
+  _email_field = ''
+  _create_acc_button = ''
+  
+  def clickSignin(self):
+    self.clickElement('id',self._signin_link)
+    
+  def enterEmail(self,emailId):
+    self.sendKeys(emailId, 'id', self._email_field)
+    
+  def clickCreateAcc(self):
+    self.clickElement('id',self._create_acc_button)
+    
+  def createAccount(self, emailId):
+    self.clickSignin()
+    self.enterEmail(emailId)
+    self.clickCreateAcc()
+    
+  def verifyAccountSuccessful(self):
+    self.waitForElement('xpath', '//tag[@attribute = "value"]')
+    result = self.isElementPresent('xpath', '//tag[@attribute = "value"]')
+    return result
