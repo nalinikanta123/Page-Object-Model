@@ -1,0 +1,19 @@
+from Page.createAccount import homePage
+from utilities.custom_logger as cl
+import logging
+import unittest
+import pytest
+
+@pytest.mark.usefixtures('onTimeSetUp', 'setUp')
+class createAccountTest(unittest.Testcase):
+  log = cl.customerLogger(logging.DEBUG)
+  
+  @pytest.fixture(autouse = True)
+  def objectSetup(self, OnetimeSetUp):
+    self.hp = homePage(self.driver)
+    
+  @pytest.mark.run(order=1)
+  def test_createAccountSuccessful(self):
+    self.hp.createAccount('test@gmail.com')
+    result = self.verifyAccountSuccessful()
+    assert result = True
