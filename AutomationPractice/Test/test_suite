@@ -1,0 +1,7 @@
+import unittest
+import pytest
+
+tc1 = unittest.loadTestsFromTestCase(createAccountTest)
+
+smoketest = unittest.TestSuite([tc1])
+unittest.TextTestRunner(verbosity = 2).run(smokeTest)
