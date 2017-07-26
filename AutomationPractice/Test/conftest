@@ -1,0 +1,23 @@
+import pytest
+import configFile.configuration import WebDriverFactory
+import Page.createAccount import homePage
+
+@pytest.yield_fiture()
+
+def setUp():
+  print('Method Level SetUp')
+  yield
+  print('Method Level TearDown')
+  
+  @pytest.yield_fixture(scope='class')
+  def oneTimeSetUp(request,browser):
+    print('one time SetUp')
+    wd = WebDriverFactory(browser)
+    driver = wd.getWebDriver()
+    lp = LoginPage(driver)
+    lp.createAccount('test@gmail.com')
+    
+    if request.cls is not None:
+      request.cls.driver = driver
+    yield driver
+    driver.quit()
