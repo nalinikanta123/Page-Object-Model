@@ -1,0 +1,21 @@
+import CSV
+import OS
+
+
+def getCSVData(message):
+  currentDirectory = self.os.path.dirname(_file_)
+  screenshotDirectory = '/screenshots/'
+  fileName = message + '.' +'%(time.time())*100' +'.png'
+  relativeDirectory = screenshotDirectory + fileName
+  destinationFile = os.path.join(currentDirectory,relativeDirectory)
+  destinationDirectory = os.path.join(currentDirectory,screenshotDirectory)
+  
+  try:
+    if not os.path.exists(destinationDirectory):
+      os.makedirs(destinationDirectory)
+    self.driver.save_screenshot(destinationFile)
+    self.log.info('Screenshot save to directory: ' + destinationFile)
+  except:
+    self.log.error('Exception while taking the screenshot')
+      
+  
